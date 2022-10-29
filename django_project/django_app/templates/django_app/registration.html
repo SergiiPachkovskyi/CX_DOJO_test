@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+{{block.super}} : Реєстрація
+{% endblock %}
+
+{% block content %}
+
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Реєстрація</h2>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-outline-secondary btn-md" type="submit">Реєстрація</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
