@@ -11,15 +11,57 @@
 <br>
 
 <div class="container">
-    {% if request.user.is_authenticated %}
+    <div class="container">
+        {% if request.user.is_authenticated %}
 
-    {% else %}
-    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Add users</h3>
+
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-outline-secondary btn-md" type="submit">Load</button>
+                </form>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Date joined</th>
+            </tr>
+            </thead>
+            {% for user in users %}
+            <tr>
+                <th>{{ user.username }}</th>
+                <th>{{ user.first_name }}</th>
+                <th>{{ user.last_name }}</th>
+                <th>{{ user.date_joined }}</th>
+            </tr>
+            {% endfor %}
+        </table>
+
+        {% else %}
+
         <h1>Welcome to CX DOJO test app!</h1>
         <h3>Log in or register to work with the program</h3>
-    </div>
-    {% endif %}
 
+        {% endif %}
+    </div>
 </div>
 
 {% endblock %}
+
+<script>
+    alert(123)
+    var input = document.getElementById('id_file_xml');
+    var label = input.labels[1];
+    label.textContent = 'asd'
+</script>
