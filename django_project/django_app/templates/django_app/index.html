@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-{{block.super}} : CX DOJO
+{{block.super}}
 {% endblock %}
 
 {% block content %}
@@ -13,40 +13,43 @@
 <div class="container">
     <div class="container">
         {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>Add users</h3>
 
-        <div class="row">
-            <div class="col-md-4">
-                <h3>Add users</h3>
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button class="btn btn-outline-secondary btn-md" type="submit">Load</button>
+                        </form>
+                    </div>
+                </div>
 
-                <form action="" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button class="btn btn-outline-secondary btn-md" type="submit">Load</button>
-                </form>
-            </div>
-        </div>
+                <br>
+                <br>
 
-        <br>
-        <br>
-
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Username</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Date joined</th>
-            </tr>
-            </thead>
-            {% for user in users %}
-            <tr>
-                <th>{{ user.username }}</th>
-                <th>{{ user.first_name }}</th>
-                <th>{{ user.last_name }}</th>
-                <th>{{ user.date_joined }}</th>
-            </tr>
-            {% endfor %}
-        </table>
+                {% if users|length %}
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Date joined</th>
+                        </tr>
+                        </thead>
+                        {% for user in users %}
+                        <tr>
+                            <th>{{ user.username }}</th>
+                            <th>{{ user.first_name }}</th>
+                            <th>{{ user.last_name }}</th>
+                            <th>{{ user.date_joined }}</th>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            {% endif %}
 
         {% else %}
 

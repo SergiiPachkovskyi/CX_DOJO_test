@@ -13,7 +13,7 @@ test app for CX DOJO
 
 Clone the project Repository
 ```
-$ git clone https://github.com/SergiiPachkovskyi/Avto_net
+$ git clone https://github.com/SergiiPachkovskyi/CX_DOJO_test.git
 ```
 
 Enter the project folder and create a virtual environment

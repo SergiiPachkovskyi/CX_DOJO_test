@@ -1,20 +1,22 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, logout
+from django.urls import reverse
 
 from .forms import UserLoginForm, UserRegisterForm, AddUsersForm
+from .utils import load_files
 
 
 def index(request):
-    users = User.objects.order_by('-date_joined')
+    users = User.objects.filter(is_staff=False).order_by('-date_joined')
     if request.method == 'POST':
         form = AddUsersForm(request.POST, request.FILES)
         if form.is_valid():
             cd = form.cleaned_data
-            print(cd.get('file_xml'))
-            print(cd.get('file_csv'))
+            load_files(cd.get('file_xml').file, cd.get('file_csv').file)
+            return HttpResponseRedirect(reverse('home'))
     else:
         form = AddUsersForm()
     return render(request, template_name='django_app/index.html', context={
