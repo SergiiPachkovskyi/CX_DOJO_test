@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    hello
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+{{block.super}} : CX DOJO
+{% endblock %}
+
+{% block content %}
+
+<br>
+
+<div class="container">
+    {% if request.user.is_authenticated %}
+
+    {% else %}
+    <div class="container-fluid">
+        <h1>Welcome to CX DOJO test app!</h1>
+        <h3>Log in or register to work with the program</h3>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

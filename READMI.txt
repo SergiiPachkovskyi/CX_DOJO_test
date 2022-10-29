@@ -1,2 +1,0 @@
-1. refill django_project/django_project/.env
-2. run django_project/django_project/create_db.py
