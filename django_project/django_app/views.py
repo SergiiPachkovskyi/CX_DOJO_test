@@ -15,7 +15,7 @@ def index(request):
         form = AddUsersForm(request.POST, request.FILES)
         if form.is_valid():
             cd = form.cleaned_data
-            load_files(cd.get('file_xml').file, cd.get('file_csv').file)
+            load_files(cd.get('file_csv').file, cd.get('file_xml').file)
             return HttpResponseRedirect(reverse('home'))
     else:
         form = AddUsersForm()

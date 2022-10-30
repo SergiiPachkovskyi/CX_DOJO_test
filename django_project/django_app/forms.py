@@ -25,8 +25,7 @@ class UserRegisterForm(UserCreationForm):
 
 
 class AddUsersForm(forms.Form):
-    file_xml = forms.FileField(label='file XML', allow_empty_file=False, validators=[validate_file_xml],
-                               widget=forms.FileInput(attrs={'class': "form-control"}))
     file_csv = forms.FileField(label='file CSV', allow_empty_file=False, validators=[validate_file_csv],
                                widget=forms.FileInput(attrs={'class': "form-control"}))
-
+    file_xml = forms.FileField(label='file XML', allow_empty_file=False, validators=[validate_file_xml],
+                               widget=forms.FileInput(attrs={'class': "form-control"}))

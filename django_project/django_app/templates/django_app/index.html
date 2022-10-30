@@ -16,7 +16,7 @@
             {% if request.user.is_superuser %}
                 <div class="row">
                     <div class="col-md-4">
-                        <h3>Add users</h3>
+                        <h3>Data collection</h3>
 
                         <form action="" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
@@ -30,6 +30,7 @@
                 <br>
 
                 {% if users|length %}
+                    <h3>Collected data</h3>
                     <table class="table table-striped">
                         <thead>
                         <tr>
