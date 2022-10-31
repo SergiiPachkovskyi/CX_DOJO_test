@@ -26,10 +26,12 @@ class DataCollectionTest(TestCase):
         self.assertEqual(
             read_csv(df),
             defaultdict(None, {
-                'M.Steam': {
+                'm.steam': {
+                    'username': 'M.Steam',
                     'password': 'ASDf43f#$dsD',
                     'first_name': None,
                     'last_name': None,
+                    'avatar': None,
                     'date_joined': datetime.datetime(2021, 12, 5, 12, 42, 12)
                 }
             }))
@@ -37,10 +39,12 @@ class DataCollectionTest(TestCase):
     def test_read_xml(self):
         users = defaultdict()
         users.update({
-            'M.Steam': {
+            'm.steam': {
+                'username': 'M.Steam',
                 'password': 'ASDf43f#$dsD',
                 'first_name': None,
                 'last_name': None,
+                'avatar': None,
                 'date_joined': datetime.datetime(2021, 12, 5, 12, 42, 12)
             }
         })
@@ -49,14 +53,21 @@ class DataCollectionTest(TestCase):
             'id': ['1', '2', '3'],
             'first_name': ['Max', 'Anton', None],
             'last_name': ['St(dsa53d)eam', None, None],
+            'avatar': [
+                'https://pbs.twimg.com/media/BcINeMVCIAABeWd.jpg',
+                'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/35af6a41332353.57a1ce913e889.jpg',
+                'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/15345c41332353.57a1ce9141249.jpg'
+            ],
         })
         self.assertEqual(
             read_xml(users, df),
             defaultdict(None, {
-                'M.Steam': {
+                'm.steam': {
+                    'username': 'M.Steam',
                     'password': 'ASDf43f#$dsD',
                     'first_name': 'Max',
                     'last_name': 'Steam',
+                    'avatar': 'https://pbs.twimg.com/media/BcINeMVCIAABeWd.jpg',
                     'date_joined': datetime.datetime(2021, 12, 5, 12, 42, 12)
                 }
             }))

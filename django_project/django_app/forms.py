@@ -24,8 +24,8 @@ class UserRegisterForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
 
 
-class AddUsersForm(forms.Form):
-    file_csv = forms.FileField(label='file CSV', allow_empty_file=False, validators=[validate_file_csv],
+class DataCollectionForm(forms.Form):
+    file_csv = forms.FileField(label='CSV file', allow_empty_file=False, validators=[validate_file_csv],
                                widget=forms.FileInput(attrs={'class': "form-control"}))
-    file_xml = forms.FileField(label='file XML', allow_empty_file=False, validators=[validate_file_xml],
+    file_xml = forms.FileField(label='XML file', allow_empty_file=False, validators=[validate_file_xml],
                                widget=forms.FileInput(attrs={'class': "form-control"}))

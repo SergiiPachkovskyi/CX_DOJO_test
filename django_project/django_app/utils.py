@@ -7,6 +7,8 @@ from django.db import IntegrityError
 import pandas
 from pandas import DataFrame
 
+from .models import Profile
+
 
 def remove_brackets(s: str | None):
     if s is None:
@@ -42,9 +44,11 @@ def read_csv(file_csv: DataFrame):
         password = file_csv.password.array[i]
 
         user_data = {
+            'username': username,
             'password': password,
             'first_name': None,
-            'last_name': None
+            'last_name': None,
+            'avatar': None
         }
 
         date_joined = file_csv.date_joined.array[i]
@@ -54,7 +58,7 @@ def read_csv(file_csv: DataFrame):
         except ValueError:
             pass
 
-        users[username] = user_data
+        users[username.lower()] = user_data
 
     return users
 
@@ -68,14 +72,17 @@ def read_xml(users: dict, file_xml: DataFrame):
         first_name = remove_brackets(first_name)
         last_name = file_xml.last_name.array[i]
         last_name = remove_brackets(last_name)
+        avatar = file_xml.avatar.array[i]
 
         username = f'{"" if first_name == "" else first_name[0] + "."}{"" if last_name == "" else last_name}'
+        username = username.lower()
 
         if users.get(username) is None:
             continue
 
         users[username]['first_name'] = first_name
         users[username]['last_name'] = last_name
+        users[username]['avatar'] = avatar
 
     return users
 
@@ -86,12 +93,21 @@ def create_users(users: dict):
         if user['first_name'] is None or user['last_name'] is None:
             continue
 
-        new_user = User(username=u, **user)
+        new_user = User(
+            username=user['username'],
+            first_name=user['first_name'],
+            last_name=user['last_name'],
+        )
+        if user.get('date_joined'):
+            new_user.date_joined = user['date_joined']
         try:
             new_user.set_password(user['password'])
             new_user.save()
+
+            new_profile = Profile(user=new_user, image_url=user['avatar'])
+            new_profile.save()
         except IntegrityError:
-            print(f'User {u} is already exist!')
+            print(f'User {user["username"]} is already exist!')
 
 
 def load_files(file_csv, file_xml):
