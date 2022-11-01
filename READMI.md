@@ -26,7 +26,6 @@ $ python -m venv venv
 Activate the virtual environment
 ``` 
 $ . venv/bin/activate # On Linux or Unix
-
 $ . venv/Scripts/activate # On Windows  
 ```
 
@@ -54,6 +53,7 @@ $ python django_project/create_db.py
 
 Make migrations and create a superuser
 ``` 
+$ python manage.py makemigrations
 $ python manage.py migrate
 $ python manage.py createsuperuser
 ``` 
