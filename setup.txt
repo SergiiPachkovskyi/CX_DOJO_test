@@ -42,7 +42,7 @@ $ python django_project/create_db.py
 
 Make migrations and create a superuser
 ```
-$ python manage.py makemigrations
+$ python manage.py makemigrations django_app
 $ python manage.py migrate
 $ python manage.py createsuperuser
 ```
