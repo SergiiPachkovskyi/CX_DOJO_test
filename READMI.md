@@ -16,10 +16,8 @@ Clone the project Repository
 $ git clone https://github.com/SergiiPachkovskyi/CX_DOJO_test.git
 ```
 
-Enter the project folder and create a virtual environment
+Create a virtual environment
 ``` 
-$ cd django_project
-
 $ python -m venv venv 
 ```
 
@@ -44,6 +42,10 @@ $ pip install psycopg2 # On Windows
 
 Refill django_project/django_project/.env
 
+Enter the project folder
+``` 
+$ cd django_project
+```
 
 Create database
 
