@@ -10,6 +10,7 @@ test app for CX DOJO
 * PostgreSQL
 
 # Setup
+(PostgreSQL must be installed on your local machine)
 
 Clone the project Repository
 ```
